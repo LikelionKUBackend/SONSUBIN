@@ -31,5 +31,3 @@ def ex3():
 def ex4():
     for i in range(1,5):
         print("*"*i)
-
-ex3()
