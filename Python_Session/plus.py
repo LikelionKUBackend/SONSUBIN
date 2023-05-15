@@ -4,8 +4,9 @@
 
 
 # 클래스 선언시에 괄호 생략은 상관없음
-class Bird: 
-    def bird_say(self,say):
+class Bird:
+    def bird_say(self):
+        say=input("말해봐: ")
         print(say)
 
 
@@ -25,9 +26,10 @@ def ex2():
 
 def ex3():
     ang=Bird()
-    ang.bird_say("엉엉~")
+    ang.bird_say()
 
 def ex4():
     for i in range(1,5):
         print("*"*i)
 
+ex3()
