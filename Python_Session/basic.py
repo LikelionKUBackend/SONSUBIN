@@ -40,8 +40,8 @@ print(todo_list)
 #////////////////////////////////////////
 profile_list = ['김멋사', '01012341234', 21]
 dic={}
-dic['이름']=profile_list[0];
-dic['전화번호']=profile_list[1];
-dic['나이']=profile_list[2];
+dic['이름']=profile_list[0]
+dic['전화번호']=profile_list[1]
+dic['나이']=profile_list[2]
 
 print(dic)
