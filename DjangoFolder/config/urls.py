@@ -19,5 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('pybo.urls')),
+    path('pybo/', include('pybo.urls')),
 ]
+
+# 기본 url에서 뒤에 pybo/가 붙으면 pybo.urls로 넘어가라
