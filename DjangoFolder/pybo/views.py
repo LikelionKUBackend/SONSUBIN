@@ -1,16 +1,26 @@
-from django.shortcuts import render
-from .models import Question
+from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
+from .models import Question, Answer
+
 
 def index(request):
-    question_list=Question.objects.order_by('-create_date')
-    context={'question_list':question_list}
-    return render(request,'pybo/question_list.html',context)
-# Create your views here.
-
+    question_list = Question.objects.order_by('-create_date')
+    context = {'question_list': question_list}
+    return render(request, 'pybo/question_list.html', context)
 
 def detail(request, question_id):
     question = Question.objects.get(id=question_id)
-    context = {'question': question}
+    answer_list = Answer.objects.filter(question_id = question_id)
+    context = {'question': question, 'answer_list': answer_list}
     return render(request, 'pybo/question_detail.html', context)
+
+def answer_create(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    #form에 POST된 내용을 바탕으로 question 객체에 연결되는 answer 객체를 생성
+    answer = Answer(question=question, content=request.POST.get('content'), create_date=timezone.now())
+    answer.save()
+    return redirect('pybo:detail', question_id=question.id)
+
+def question_create():
     
-# 웹브라우저 html로 띄우는거니까 개행문자를 <br>로 해줘야한다!
+    return redirect('pybo:index')
