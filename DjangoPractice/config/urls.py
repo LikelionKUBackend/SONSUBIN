@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from demos.views import calculator
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('calculator/',calculator),
 ]
+#url에서 정의가 되어야 view가 그 코드를 받아 실행할 수 있다!
