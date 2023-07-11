@@ -16,6 +16,13 @@
 </head>
 <body>
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
+<div class="info">
+    {% if user.is_anonymous %}
+        <a href="{%url 'common:login'%}">로그인</a>
+        <a href="{%url 'common:signup'%}">회원가입</a>
+    {% endif %}
+    <a href="{% url 'common:logout' %}">{{user.username}}</a>
+</div>
 {% block content %}
 {% endblock %}
 <!-- 기본 템플릿 안에 삽입될 내용 End -->

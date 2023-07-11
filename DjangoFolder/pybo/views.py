@@ -10,7 +10,8 @@ def index(request):
 
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    context = {'question': question}
+    answer_list = Answer.objects.filter(question_id = question_id)
+    context = {'question': question, 'answer_list': answer_list}
     return render(request, 'pybo/question_detail.html', context)
 
 def answer_create(request, question_id):
@@ -23,7 +24,8 @@ def question_form(request):
     return render(request,'pybo/question_form.html')
 
 def question_create(request):
-    question = Question(subject = request.POST.get('subject'), content=request.POST.get('content'), create_date=timezone.now())
+    author=request.user
+    question = Question(author=author,subject = request.POST.get('subject'), content=request.POST.get('content'), create_date=timezone.now())
     if question.subject=="":
         question.subject="제목없음"
     if question.content=="":
