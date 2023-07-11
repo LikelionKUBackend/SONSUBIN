@@ -2,7 +2,6 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Question, Answer
-from .forms import QuestionForm, AnswerForm
 
 def index(request):
     question_list = Question.objects.order_by('-create_date')
@@ -16,28 +15,19 @@ def detail(request, question_id):
 
 def answer_create(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    if request.method == "POST":
-        form = AnswerForm(request.POST)
-        if form.is_valid():
-            answer = form.save(commit=False)
-            answer.create_date = timezone.now()
-            answer.question = question
-            answer.save()
-            return redirect('pybo:detail', question_id=question.id)
-    else:
-        return HttpResponseNotAllowed('Only POST is possible.')
-    context = {'question': question, 'form': form}
-    return render(request, 'pybo/question_detail.html', context)
+    answer = Answer(question=question, content=request.POST.get('content'), create_date=timezone.now())
+    answer.save()
+    return redirect('pybo:detail', question_id=question.id)
+
+def question_form(request):
+    return render(request,'pybo/question_form.html')
 
 def question_create(request):
-    if request.method == 'POST':
-        form = QuestionForm(request.POST)
-        if form.is_valid():
-            question = form.save(commit=False)
-            question.create_date = timezone.now()
-            question.save()
-            return redirect('pybo:index')
-    else:
-        form = QuestionForm()
-    context = {'form': form}
-    return render(request, 'pybo/question_form.html', context)
+    question = Question(subject = request.POST.get('subject'), content=request.POST.get('content'), create_date=timezone.now())
+    if question.subject=="":
+        question.subject="제목없음"
+    if question.content=="":
+        question.subject="내용없음"
+    
+    question.save()
+    return redirect('pybo:index')
