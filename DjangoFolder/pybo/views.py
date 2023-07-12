@@ -16,7 +16,8 @@ def detail(request, question_id):
 
 def answer_create(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    answer = Answer(question=question, content=request.POST.get('content'), create_date=timezone.now())
+    author=request.user
+    answer = Answer(author=author,question=question, content=request.POST.get('content'), create_date=timezone.now())
     answer.save()
     return redirect('pybo:detail', question_id=question.id)
 

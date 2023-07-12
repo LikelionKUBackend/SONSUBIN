@@ -4,4 +4,16 @@ div.info{
     text-align: center;
 }
 
-/* 왜 안 먹을까..? */
+
+.question_title{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.author_info{
+    display: inline-block;
+    font-weight: bold;
+    color: gray;
+    margin-bottom: 0;
+    margin-right: 5px;
+}

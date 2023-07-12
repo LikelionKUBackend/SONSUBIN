@@ -2,7 +2,10 @@
 {%block content%}
 <div class="container my-3">
     <!-- 질문 -->
-    <h2 class="border-bottom py-2">{{ question.subject }}</h2>
+    <div class="border-bottom py-2">
+        <h2 class="question_title">{{ question.subject }}</h2>
+        <p class="author_info">작성자: {{question.author}}</p>
+    </div>
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">{{ question.content }}</div>
@@ -21,7 +24,7 @@
             <div class="card-text" style="white-space: pre-line;">{{ answer.content }}</div>
             <div class="d-flex justify-content-end">
                 <div class="badge bg-light text-dark p-2">
-                    {{ answer.create_date }}
+                    작성자: {{answer.author}} / {{ answer.create_date }}
                 </div>
             </div>
         </div>

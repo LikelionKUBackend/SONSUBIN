@@ -18,6 +18,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete = models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     # on_delete(삭제가 되면)->CASCADE로(종속된 질문이 삭제되면 그 질문을 foreign key로 가지는 애들을 전부 삭제하는!)
     # Foreign Key: 외부의 키인데, Question이라는 모델에 있다!
     # 각 객체의 Foreign key 필드는 참조하고 있는 모델의 객체를 넣어줘야한다!
