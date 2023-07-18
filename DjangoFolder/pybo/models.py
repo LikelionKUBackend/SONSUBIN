@@ -8,6 +8,7 @@ class Question(models.Model):
     #User 모델에 있는 Foreign Key
     content = models.TextField()
     create_date = models.DateTimeField()
+    modify_date=models.DateTimeField(null=True, blank=True)
     def __str__(self):
         return self.subject
         # python 에서 __ __ 는 내장함수를 뜻함.
@@ -25,5 +26,8 @@ class Answer(models.Model):
     # 즉, Answer객체는 Question에 종속되어있다.!
     content = models.TextField()
     create_date = models.DateTimeField()
+    modify_date=models.DateTimeField(null=True, blank=True)
+    def __str__(self):
+        return self.content
 
 

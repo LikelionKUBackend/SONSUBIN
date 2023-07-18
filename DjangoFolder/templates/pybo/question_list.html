@@ -20,7 +20,7 @@
                     <a href="{% url 'pybo:detail' question.id %}">{{ question.subject }}</a>
                 </td>
                 <td>{{question.author}}</td>
-                <td>{{ question.create_date }}</td>
+                <td>{{ question.modify_date }}</td>
             </tr>
         {% endfor %}
         {% else %}

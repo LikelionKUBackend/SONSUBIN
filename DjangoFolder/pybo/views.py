@@ -27,10 +27,29 @@ def question_form(request):
 def question_create(request):
     author=request.user
     question = Question(author=author,subject = request.POST.get('subject'), content=request.POST.get('content'), create_date=timezone.now())
+    question.modify_date=question.create_date
+
     if question.subject=="":
         question.subject="제목없음"
     if question.content=="":
         question.subject="내용없음"
     
     question.save()
+    return redirect('pybo:index')
+
+def question_modify(request, question_id):
+    question=get_object_or_404(Question, pk=question_id)
+    if request.method=="POST":
+        question.subject=request.POST.get('subject')
+        question.content=request.POST.get('content')
+        question.modify_date=timezone.now()
+        question.save()
+        return redirect('pybo:index')
+    else:
+        context={'question':question}
+        return render(request,'pybo/question_modify_form.html',context)
+
+def question_delete(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    question.delete()
     return redirect('pybo:index')
