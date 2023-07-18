@@ -27,3 +27,10 @@ div.info{
 .stars:hover{
     color: coral;
 }
+
+.staruser{
+    font-weight: bold;
+    color: gray;
+    display:inline-block;
+    margin:5px;
+}

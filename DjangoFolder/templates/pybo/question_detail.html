@@ -7,6 +7,12 @@
         <a class="stars" href="{% url 'pybo:question_stars' question.id %}">즐겨찾기 등록 {{question.star.count}}</a>
         <p class="author_info">작성자: {{question.author}}</p>
     </div>
+    <div class-="border-bottom py-2">
+        <p class="staruser">퍼간 사람: </p>
+        {% for username in question.star.all%}
+            <p class="staruser">{{username}}</p>
+        {% endfor %}
+    </div>
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">{{ question.content }}</div>
