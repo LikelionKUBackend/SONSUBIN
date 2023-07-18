@@ -11,6 +11,7 @@ urlpatterns = [
     path('question/create', views.question_create, name='question_create'),
     path('question/modify/<int:question_id>',views.question_modify,name='question_modify'),
     path('question/delete/<int:question_id>/', views.question_delete, name='question_delete'),
+    path('question/star/<int:question_id>/', views.question_stars, name='question_stars'),
 ]
 # config/urls.py 에서 건네 받고 그 뒤에 ""이면 views.py의 index를 실행해라!
 # name 은 별칭!

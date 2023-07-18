@@ -53,3 +53,15 @@ def question_delete(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     question.delete()
     return redirect('pybo:index')
+
+def question_stars(request,question_id):
+    question=get_object_or_404(Question, pk=question_id)
+
+    #작업을 요청한 사용자가 이미 즐겨찾기 명단에 있다면 즐겨찾기 해제
+    if request.user in question.star.all():
+        question.star.remove(request.user)
+        question.save()
+    else:
+        question.star.add(request.user)
+        question.save()
+    return redirect('pybo:detail',question_id=question.id)

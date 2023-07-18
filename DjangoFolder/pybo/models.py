@@ -9,6 +9,7 @@ class Question(models.Model):
     content = models.TextField()
     create_date = models.DateTimeField()
     modify_date=models.DateTimeField(null=True, blank=True)
+    star = models.ManyToManyField(User, related_name='stars',blank=True)
     def __str__(self):
         return self.subject
         # python 에서 __ __ 는 내장함수를 뜻함.
