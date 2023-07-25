@@ -1,7 +1,17 @@
+from django.contrib.auth.models import User
+
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Question, Answer
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response 
+from rest_framework.views import APIView
+from .serializers import QuestionSerializer
+from rest_framework.renderers import JSONRenderer
+
+
 
 def index(request):
     question_list = Question.objects.order_by('-create_date')
@@ -65,3 +75,25 @@ def question_stars(request,question_id):
         question.star.add(request.user)
         question.save()
     return redirect('pybo:detail',question_id=question.id)
+
+def apiTest(request):
+    author = request.user
+    author_list = serializers.serialize('json', author) 
+    return HttpResponse(author_list, content_type='text/')
+
+
+@api_view(["GET","POST"])
+def QuestionListAPI(request):
+    queryset = Question.objects.all()
+    print(queryset)
+    serializer = QuestionSerializer(queryset, many=True)
+    return Response(serializer.data)
+
+@api_view(["GET", "POST"])
+def create_question_by_api(request):
+    print(request.data)
+    author = User.objects.get(pk = 1, is_superuser=True)
+    question = Question(author = author, subject = request.data.get('subject'), content=request.data.get('content'), create_date=timezone.now())
+    question.modify_date = question.create_date
+    question.save()
+    return redirect('pybo:index')
