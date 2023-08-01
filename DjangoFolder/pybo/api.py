@@ -27,4 +27,3 @@ videoTitle=list(set(videoTitle))
 
 for i in videoTitle:
     print(i)
-

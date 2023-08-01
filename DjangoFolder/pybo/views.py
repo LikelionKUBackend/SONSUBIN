@@ -11,8 +11,6 @@ from rest_framework.views import APIView
 from .serializers import QuestionSerializer
 from rest_framework.renderers import JSONRenderer
 
-
-
 def index(request):
     question_list = Question.objects.order_by('-create_date')
     context = {'question_list': question_list}

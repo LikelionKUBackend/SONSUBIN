@@ -20,12 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*)s@vuu&cq!l$)=w&6*cwp4ebw%#qr8ksney77gd_tw-&)rsyp'
+SECRET_KEY = '########'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] #모든 사람 허용
+#1. 서버 실행시키고(python manage.py runserver 0.0.0.0:8000)
+#2. 본인 주소를 친구한테 넘기기
 
 
 # Application definition
